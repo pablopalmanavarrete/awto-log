@@ -5,6 +5,10 @@
 - creacion de script de datos
 - creacion de entities acorde al modelo de datos
 
+## [0.0.5] - 2020-09-09 01:21
+### Added
+- controller with methods
+
 ## [0.0.4] - 2020-09-08 23:49
 ### Added
 - entities of model

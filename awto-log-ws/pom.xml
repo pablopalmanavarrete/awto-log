@@ -10,7 +10,7 @@
     </parent>
     <groupId>cl.awto.hastag</groupId>
     <artifactId>awto-log-ws</artifactId>
-    <version>0.0.4</version>
+    <version>0.0.5</version>
     <name>awto-log-ws</name>
     <description>Modulo WS</description>
 
