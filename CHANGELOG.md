@@ -1,7 +1,13 @@
 # Changelog
 
-## [Unreleased]
-- logica de negocio
+## [0.0.8] - 2020-09-09 16:09
+### Added
+- services integration with GET methods
+- ResponseLogger class
+- property dialect to MySQL
+
+### Deleted
+- ResponseId Class
 
 ## [0.0.7] - 2020-09-09 14:04
 ### Added

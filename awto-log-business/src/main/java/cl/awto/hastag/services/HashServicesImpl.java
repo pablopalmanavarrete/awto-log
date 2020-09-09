@@ -44,7 +44,22 @@ public class HashServicesImpl implements HashServices {
     }
 
     @Override
-    public Optional<Hashtag> findHashById(Integer id) {
+    public Optional<Hashtag> findHashById(int id) {
         return hashtagRepository.findById(id);
+    }
+
+    @Override
+    public List<LoggerHashtag> findAll(){
+        return loggerHashtagRepository.findAll();
+    }
+
+    @Override
+    public List<LoggerHashtag>  findById(int idLog){
+        return loggerHashtagRepository.findByLogger_Id(idLog);
+    }
+
+    @Override
+    public List<LoggerHashtag> findByHashtag(String hashstag){
+        return loggerHashtagRepository.findByHashtag_Description(hashstag);
     }
 }

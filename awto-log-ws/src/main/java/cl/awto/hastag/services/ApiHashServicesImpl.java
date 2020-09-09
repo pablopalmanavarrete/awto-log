@@ -5,6 +5,7 @@ import cl.awto.hastag.entities.Logger;
 import cl.awto.hastag.entities.LoggerHashtag;
 import cl.awto.hastag.vo.RequestHashtag;
 import cl.awto.hastag.vo.RequestLogger;
+import cl.awto.hastag.vo.ResponseLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -13,8 +14,7 @@ import org.springframework.util.MultiValueMap;
 
 import javax.transaction.Transactional;
 import java.time.Instant;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.OK;
@@ -98,6 +98,68 @@ public class ApiHashServicesImpl implements ApiHashServices {
 
         headers.add("message", "Hashstag no encontrado en sistema");
         return new ResponseEntity<>(headers, BAD_REQUEST);
+    }
+
+    @Override
+    public ResponseEntity<Collection<ResponseLogger>> findAllLoggers() {
+        List<LoggerHashtag> loggerHashtags = hashServices.findAll();
+
+        if (loggerHashtags.isEmpty())
+            return new ResponseEntity<>(new ArrayList<>(), OK);
+
+        HashMap<Integer, ResponseLogger> loggersMap = convertLoggerHash2Response(loggerHashtags);
+
+        return new ResponseEntity<>(loggersMap.values(), OK);
+    }
+
+    @Override
+    public ResponseEntity<Collection<ResponseLogger>> findByHashtag(String hashtag) {
+        List<LoggerHashtag> loggerHashtags = hashServices.findByHashtag(validateTag(hashtag));
+
+        if (loggerHashtags.isEmpty())
+            return new ResponseEntity<>(new ArrayList<>(), OK);
+
+        HashMap<Integer, ResponseLogger> loggersMap = convertLoggerHash2Response(loggerHashtags);
+
+        return new ResponseEntity<>(loggersMap.values(), OK);
+    }
+
+    @Override
+    public ResponseEntity<ResponseLogger> findByLogId(int logId) {
+        MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
+
+        List<LoggerHashtag> loggerHashtags = hashServices.findById(logId);
+
+        if (loggerHashtags.isEmpty())
+            return new ResponseEntity<>(null, BAD_REQUEST);
+
+        HashMap<Integer, ResponseLogger> loggersMap = convertLoggerHash2Response(loggerHashtags);
+        if (loggersMap.size() == 1) {
+            return new ResponseEntity<>(loggersMap.get(loggerHashtags.get(0).getLogger().getId()), OK);
+        }
+
+        headers.add("message", "Se ha encontrado mas de un Logger con el mismo ID");
+        return new ResponseEntity<>(null, headers, BAD_REQUEST);
+    }
+
+    private HashMap<Integer, ResponseLogger> convertLoggerHash2Response(List<LoggerHashtag> loggerHashtags) {
+        HashMap<Integer, ResponseLogger> loggersMap = new HashMap<>();
+        for (LoggerHashtag logHash : loggerHashtags) {
+            if (loggersMap.containsKey(logHash.getLogger().getId())) {
+                loggersMap.get(logHash.getLogger().getId()).getHashtags().add(logHash.getHashtag().getDescription());
+            } else {
+                loggersMap.put(logHash.getLogger().getId(), new ResponseLogger());
+                loggersMap.get(logHash.getLogger().getId()).setId(logHash.getLogger().getId());
+                loggersMap.get(logHash.getLogger().getId()).setHost(logHash.getLogger().getHost());
+                loggersMap.get(logHash.getLogger().getId()).setOrigin(logHash.getLogger().getOrigin());
+                loggersMap.get(logHash.getLogger().getId()).setDetails(logHash.getLogger().getDetails());
+                loggersMap.get(logHash.getLogger().getId()).setStacktrace(logHash.getLogger().getStacktrace());
+
+                loggersMap.get(logHash.getLogger().getId()).setHashtags(new ArrayList<>());
+                loggersMap.get(logHash.getLogger().getId()).getHashtags().add(logHash.getHashtag().getDescription());
+            }
+        }
+        return loggersMap;
     }
 
     private String validateTag(String inputTag) {

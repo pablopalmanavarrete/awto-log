@@ -3,10 +3,13 @@ package cl.awto.hastag.controller;
 import cl.awto.hastag.services.ApiHashServices;
 import cl.awto.hastag.vo.RequestHashtag;
 import cl.awto.hastag.vo.RequestLogger;
+import cl.awto.hastag.vo.ResponseLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collection;
 
 @RestController
 @RequestMapping("/")
@@ -21,18 +24,18 @@ public class LoggerController {
     }
 
     @GetMapping(value = "logs", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String getAllLogs() {
-        return "ok getAllLogs";
+    public ResponseEntity<Collection<ResponseLogger>> getAllLogs() {
+        return apiHashServices.findAllLoggers();
     }
 
     @GetMapping(value = "logs/{hashtag}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String getLogByHashstag(@PathVariable("hashtag") String hashtag) {
-        return "ok getLogByHashstag" + hashtag;
+    public ResponseEntity<Collection<ResponseLogger>> getLogByHashstag(@PathVariable("hashtag") String hashtag) {
+        return apiHashServices.findByHashtag(hashtag);
     }
 
     @GetMapping(value = "logs/by/{logId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String getLogById(@PathVariable("logId") Integer logId) {
-        return "ok getLogById" + logId;
+    public ResponseEntity<ResponseLogger> getLogById(@PathVariable("logId") Integer logId) {
+        return apiHashServices.findByLogId(logId);
     }
 
     @PutMapping(value = "hastags", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

@@ -16,5 +16,11 @@ public interface HashServices {
 
     Hashtag saveOrUpdateHash(Hashtag hashtag);
 
-    Optional<Hashtag> findHashById(Integer id);
+    Optional<Hashtag> findHashById(int id);
+
+    List<LoggerHashtag> findAll();
+
+    List<LoggerHashtag>  findById(int idLog);
+
+    List<LoggerHashtag> findByHashtag(String hashstag);
 }
