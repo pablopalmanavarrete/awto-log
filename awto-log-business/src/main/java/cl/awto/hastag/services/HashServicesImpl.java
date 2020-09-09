@@ -9,6 +9,9 @@ import cl.awto.hastag.repository.LoggerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class HashServicesImpl implements HashServices {
     @Autowired
@@ -26,7 +29,7 @@ public class HashServicesImpl implements HashServices {
     }
 
     @Override
-    public Hashtag findHashtag(String hashtag) {
+    public List<Hashtag> findHashtag(String hashtag) {
         return hashtagRepository.findByDescription(hashtag);
     }
 
@@ -36,7 +39,12 @@ public class HashServicesImpl implements HashServices {
     }
 
     @Override
-    public Hashtag crearHash(Hashtag hashtag) {
+    public Hashtag saveOrUpdateHash(Hashtag hashtag) {
         return hashtagRepository.save(hashtag);
+    }
+
+    @Override
+    public Optional<Hashtag> findHashById(Integer id) {
+        return hashtagRepository.findById(id);
     }
 }

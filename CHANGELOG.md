@@ -3,9 +3,20 @@
 ## [Unreleased]
 - logica de negocio
 
+## [0.0.7] - 2020-09-09 14:04
+### Added
+- services integration for PUT method
+
+### Changed
+- modify dummy PUT for real implementation
+- change ResponseId for Integer only
+
+### Deprecated
+- ResponseId Class
+
 ## [0.0.6] - 2020-09-09 12:58
 ### Added
-- services class with create method
+- services integration for POST method
 - connection params to bd mysql
 
 ### Fixed

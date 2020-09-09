@@ -10,7 +10,7 @@
     </parent>
     <groupId>cl.awto.hastag</groupId>
     <artifactId>awto-log-business</artifactId>
-    <version>0.0.6</version>
+    <version>0.0.7</version>
     <packaging>jar</packaging>
     <name>awto-log-business</name>
     <description>Modulo Business y conexion a BD</description>

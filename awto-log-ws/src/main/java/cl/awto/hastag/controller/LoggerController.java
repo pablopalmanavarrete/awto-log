@@ -3,7 +3,6 @@ package cl.awto.hastag.controller;
 import cl.awto.hastag.services.ApiHashServices;
 import cl.awto.hastag.vo.RequestHashtag;
 import cl.awto.hastag.vo.RequestLogger;
-import cl.awto.hastag.vo.ResponseId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +16,7 @@ public class LoggerController {
     private ApiHashServices apiHashServices;
 
     @PostMapping(value = "logs", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ResponseId> createLog(@RequestBody RequestLogger request) {
+    public ResponseEntity<Integer> createLog(@RequestBody RequestLogger request) {
         return apiHashServices.createLog(request);
     }
 
@@ -37,7 +36,7 @@ public class LoggerController {
     }
 
     @PutMapping(value = "hastags", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String updateHashstag(@RequestBody RequestHashtag requestHashtag) {
-        return "ok updateHashstag" + requestHashtag.toString();
+    public ResponseEntity<Integer> updateHashstag(@RequestBody RequestHashtag requestHashtag) {
+        return apiHashServices.update(requestHashtag);
     }
 }

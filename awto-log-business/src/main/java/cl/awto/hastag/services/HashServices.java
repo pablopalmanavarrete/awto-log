@@ -4,12 +4,17 @@ import cl.awto.hastag.entities.Hashtag;
 import cl.awto.hastag.entities.Logger;
 import cl.awto.hastag.entities.LoggerHashtag;
 
+import java.util.List;
+import java.util.Optional;
+
 public interface HashServices {
     Logger crearLogger(Logger logger);
 
-    Hashtag findHashtag(String hashtag);
+    List<Hashtag> findHashtag(String hashtag);
 
     LoggerHashtag crearHashLogger(LoggerHashtag logHash);
 
-    Hashtag crearHash(Hashtag hashtag);
+    Hashtag saveOrUpdateHash(Hashtag hashtag);
+
+    Optional<Hashtag> findHashById(Integer id);
 }
