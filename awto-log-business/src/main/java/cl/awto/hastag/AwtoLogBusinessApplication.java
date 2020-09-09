@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AwtoLogApplication {
+public class AwtoLogBusinessApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(AwtoLogApplication.class, args);
+        SpringApplication.run(AwtoLogBusinessApplication.class, args);
     }
 
 }
