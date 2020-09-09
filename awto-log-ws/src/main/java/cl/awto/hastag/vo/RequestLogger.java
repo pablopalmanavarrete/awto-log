@@ -16,6 +16,6 @@ public class RequestLogger implements Serializable {
     private String origin;
     private String details;
     private String stacktrace;
-    private List<String> hashstags;
+    private List<String> hashtags;
 
 }

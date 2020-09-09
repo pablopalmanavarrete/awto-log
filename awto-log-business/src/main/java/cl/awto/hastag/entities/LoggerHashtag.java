@@ -16,13 +16,15 @@ import javax.persistence.*;
 public class LoggerHashtag {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "log_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "log_id", nullable = false)
     private Logger logger;
 
-    @Column(name = "hastag_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "hastag_id", nullable = false)
     private Hashtag hashtag;
 }

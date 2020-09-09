@@ -1,18 +1,24 @@
 package cl.awto.hastag.controller;
 
+import cl.awto.hastag.services.ApiHashServices;
 import cl.awto.hastag.vo.RequestHashtag;
 import cl.awto.hastag.vo.RequestLogger;
+import cl.awto.hastag.vo.ResponseId;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/")
 public class LoggerController {
 
+    @Autowired
+    private ApiHashServices apiHashServices;
 
     @PostMapping(value = "logs", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String createLog(@RequestBody RequestLogger request) {
-        return "ok createLog " + request.toString();
+    public ResponseEntity<ResponseId> createLog(@RequestBody RequestLogger request) {
+        return apiHashServices.createLog(request);
     }
 
     @GetMapping(value = "logs", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

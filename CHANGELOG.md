@@ -2,8 +2,18 @@
 
 ## [Unreleased]
 - logica de negocio
-- creacion de script de datos
-- creacion de entities acorde al modelo de datos
+
+## [0.0.6] - 2020-09-09 12:58
+### Added
+- services class with create method
+- connection params to bd mysql
+
+### Fixed
+- column join
+- AutoIncrement from AUTO to IDENTITY
+
+### Changed
+- dummy method create to real implementations
 
 ## [0.0.5] - 2020-09-09 01:21
 ### Added
