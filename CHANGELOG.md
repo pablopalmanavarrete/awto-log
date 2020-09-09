@@ -1,10 +1,13 @@
 # Changelog
 
 ## [Unreleased]
-- generacion modulo ws
 - logica de negocio
 - creacion de script de datos
 - creacion de entities acorde al modelo de datos
+
+## [0.0.3] - 2020-09-08 22:40
+### Added
+- modulo ws
 
 ## [0.0.2] - 2020-09-08 22:34
 ### Added
